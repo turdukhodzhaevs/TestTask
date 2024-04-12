@@ -21,7 +21,10 @@ namespace TestTask.Handlers
             Console.WriteLine("[INFORMATION]: Чтение данных из файла.");
             var readResult = _fileManager.Read(request.CommandLineParameters.LogFilePath);
             if (!readResult.Any())
+            {
+                Console.WriteLine("[INFORMATION]: Файл пуст.");
                 return null;
+            }
             request.SetEntryLog(readResult);
             return _nextHandler?.HandleRequest(request);
         }

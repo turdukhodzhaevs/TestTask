@@ -19,14 +19,11 @@ namespace TestTask.Handlers
         {
             if (request.CommandLineParameters.FilterParameters == null)
                 return null;
-            
             request.SetFilterParameters();
-
             Console.WriteLine("[INFORMATION]: Фильтрация лога.");
             var filterResult = request.LogEntryList.Filter(request.LogFilter);
             if (!filterResult.Any()) return null;
             request.SetLogToWrite(filterResult);
-
             return _nextHandler?.HandleRequest(request);
         }
     }

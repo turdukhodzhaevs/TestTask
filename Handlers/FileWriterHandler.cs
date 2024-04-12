@@ -1,4 +1,5 @@
 using System;
+using System.Linq;
 using TestTask.Interfaces;
 using TestTask.Services;
 
@@ -20,6 +21,12 @@ namespace TestTask.Handlers
             if (string.IsNullOrWhiteSpace(request.CommandLineParameters.OutputFilePath))
             {
                 Console.WriteLine("[ERROR]: Не указан путь к файлу записти.");
+                return null;
+            }
+
+            if (!request.LogToWrite.Any())
+            {
+                Console.WriteLine("[INFORMATION]: Данные для записи пусты, запись не будет выполнен.");
                 return null;
             }
 
